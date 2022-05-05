@@ -19,6 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:     
     - name: OWASP ZAP Baseline Scan
-      uses: zaproxy/action-baseline@v0.3.0
+      uses: zaproxy/action-baseline@v0.6.1
       with:
         target: "https://www.techmahindra.com/en-in/?f=2322667583"
