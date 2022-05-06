@@ -21,4 +21,4 @@ jobs:
     - name: OWASP ZAP Full Scan
       uses: zaproxy/action-baseline@v0.4.0
       with:
-        target: "https://techconnectweb.azurewebsites.net/"
+        target: "https://www.rediff.com"
