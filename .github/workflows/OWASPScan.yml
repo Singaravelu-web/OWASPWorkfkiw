@@ -15,10 +15,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  owasp-zap:
+    name: OWASP ZAP Baseline Scan
     runs-on: ubuntu-latest
-    steps:     
-    - name: OWASP ZAP Full Scan
-      uses: zaproxy/action-baseline@v0.4.0
-      with:
-        target: "https://www.w3schools.com"
+    steps:
+      - uses: zaproxy/action-baseline@v0.6.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: 'https://www.google.com'
+          docker_name: 'owasp/zap2docker-stable'
+          fail_action: true
+          allow_issue_writing: true
