@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:     
-    - name: OWASP ZAP Baseline Scan
-      uses: zaproxy/action-baseline@v0.3.0
+    - name: OWASP ZAP Full Scan
+      uses: zaproxy/action-full-scan@v0.1.0
       with:
-        target: "https://www.rediff.com"
+        target: "https://techconnectweb.azurewebsites.net/"
