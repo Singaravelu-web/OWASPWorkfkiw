@@ -15,19 +15,24 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  zap_scan:
+  website-scan:
     runs-on: ubuntu-latest
-    name: Scan the webapplication
+    name: DAST (Dynamic Application Security Testing)
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: main
-      - name: ZAP Scan
+          ref: master
+      - name: Action Full Scan
         uses: zaproxy/action-full-scan@v0.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'owasp/zap2docker-stable'
-          target: 'https://www.zaproxy.org/'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a'
+          docker_name: owasp/zap2docker-stable
+          target: ${{ secrets.WEBSITE_URL }}
+          cmd_options: >
+            -a
+            -j
+            -z "
+            -config alert.maxInstances=0
+            -config view.locale=ja_JP
+            "
