@@ -1,17 +1,13 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Scan_WebApp
-
-# Controls when the workflow will run
+name: ZAP-SCAN
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  #push:
-  #  branches: [ main ]
-  #pull_request:
-  #  branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+   schedule:
+     - cron: '0 2 * * sun' #
+   workflow_dispatch:
+      inputs:
+         target:
+            description: 'target URL'     
+            required: true
+            default: ''
 
 jobs:
   zap_scan:
@@ -23,10 +19,10 @@ jobs:
         with:
           ref: main
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.6.1
+        uses: zaproxy/action-baseline@v0.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
-          target: 'https://www.zaproxy.org'
+          target: "${{ github.event.inputs.target }}"
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
