@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
+      - run: npm install -D owasp-dependency-check  
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.4.0
         with:
